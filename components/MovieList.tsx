@@ -17,7 +17,7 @@ import { Box, Stack, Image, Heading } from '@chakra-ui/core'
 import { EmailIcon } from '@chakra-ui/icons'
 import styled from '@emotion/styled'
 import type { MovieProps } from '../types/MovieProps'
-import type { MovieResult } from '../types/MovieProps'
+import type { MovieResults } from '../types/MovieProps'
 
 const Description = styled(Box)`
   p {
@@ -32,7 +32,7 @@ const MovieList = ({ movies }: { movies: MovieProps }): JSX.Element => {
   const orderedByReleaseDate = [...movies.results].sort(sortByDate)
   return (
     <Accordion allowToggle>
-      {orderedByReleaseDate.map((movie: MovieResult) => {
+      {orderedByReleaseDate.map((movie: MovieResults) => {
         const posterPath = `https://www.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`
         return (
           <AccordionItem key={movie.id}>
