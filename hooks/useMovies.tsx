@@ -20,8 +20,9 @@ function useJobs(): fetchMovies {
   const today = new Date();
   const beforeDate = new Date(new Date().setDate(today.getDate() - 30));
   //get movies for the last 30 days
-  const startDate = beforeDate.getFullYear() + "-" + (beforeDate.getMonth() + 1) + "-" + beforeDate.getDate();
-  const fetchURL = `https://api.themoviedb.org/3/discover/movie?api_key=339b085155875336dc96ea5cdc24d952&primary_release_date.gte=${startDate}`
+  const todaysDate = today.toISOString().split('T')[0]
+  const startDate = beforeDate.toISOString().split('T')[0]
+  const fetchURL = `https://api.themoviedb.org/3/discover/movie?api_key=339b085155875336dc96ea5cdc24d952&primary_release_date.gte=${startDate}&primary_release_date.lte=${todaysDate}`
 
   const { data, error } = useSWR(
     fetchURL,

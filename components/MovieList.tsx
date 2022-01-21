@@ -4,26 +4,14 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  IconButton,
-  Link,
-  Button,
-  HStack,
   Stat,
   StatLabel,
   StatHelpText,
   StatNumber,
 } from '@chakra-ui/react'
-import { Box, Stack, Image, Heading } from '@chakra-ui/core'
-import { EmailIcon } from '@chakra-ui/icons'
-import styled from '@emotion/styled'
+import { Box, Stack, Image } from '@chakra-ui/core'
 import type { MovieProps } from '../types/MovieProps'
 import type { MovieResults } from '../types/MovieProps'
-
-const Description = styled(Box)`
-  p {
-    margin: 1rem;
-  }
-`
 
 const MovieList = ({ movies }: { movies: MovieProps }): JSX.Element => {
   const sortByDate = (a, b) => {
@@ -42,7 +30,7 @@ const MovieList = ({ movies }: { movies: MovieProps }): JSX.Element => {
                 _focus={{ boxShadow: 'none' }}
               >
                 <Stack direction="row" align="center">
-                  <Stat>
+                  <Stat minWidth="120px">
                     <StatLabel>Rating</StatLabel>
                     <StatNumber>{movie.vote_average}</StatNumber>
                     <StatHelpText>
@@ -61,11 +49,12 @@ const MovieList = ({ movies }: { movies: MovieProps }): JSX.Element => {
             <AccordionPanel pb={4}>
               <Stack direction="row">
               <Image
-                    size={220}
+                    size={{ base: '140px', md: '220px', lg: '400px' }}
                     objectFit="contain"
                     src={posterPath}
-                    alt={movie.title}
+                    alt={movie.title}   
                     borderRadius='5%'
+                    alignSelf="center"
                   />
                 <Stack justify="center" ml={3}>
                   <Box textAlign="left">Relase date: {movie.release_date}</Box>
