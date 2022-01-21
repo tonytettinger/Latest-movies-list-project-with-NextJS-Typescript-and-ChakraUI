@@ -2,7 +2,7 @@ import useSWR from 'swr'
 import { MovieProps } from '../types/MovieProps';
 
 interface fetchMovies {
-  movies: MovieProps[]
+  movies: MovieProps
   isLoading: boolean
   isError: Error
 }
