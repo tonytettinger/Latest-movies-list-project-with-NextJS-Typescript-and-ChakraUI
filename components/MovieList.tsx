@@ -21,7 +21,7 @@ const MovieList = ({ movies }: { movies: MovieProps }): JSX.Element => {
   return (
     <Accordion allowToggle>
       {orderedByReleaseDate.map((movie: MovieResults) => {
-        const posterPath = `https://www.themoviedb.org/t/p/w440_and_h660_face${movie.poster_path}`
+        const posterPath = `https://www.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}`
         return (
           <AccordionItem key={movie.id}>
             <div>
@@ -49,12 +49,13 @@ const MovieList = ({ movies }: { movies: MovieProps }): JSX.Element => {
             <AccordionPanel pb={4}>
               <Stack direction="row">
               <Image
-                    size={{ base: '140px', md: '220px', lg: '400px' }}
                     objectFit="contain"
                     src={posterPath}
                     alt={movie.title}   
                     borderRadius='5%'
                     alignSelf="center"
+                    width="150px"
+                    height="225px"
                   />
                 <Stack justify="center" ml={3}>
                   <Box textAlign="left">Relase date: {movie.release_date}</Box>
