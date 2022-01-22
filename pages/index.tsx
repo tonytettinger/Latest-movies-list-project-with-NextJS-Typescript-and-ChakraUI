@@ -1,23 +1,34 @@
 import useMovies from '../hooks/useMovies'
 import MovieList from '../components/MovieList'
 import { Spinner } from '@chakra-ui/core'
-import { Container, Heading, Image, Flex, Spacer, Link } from '@chakra-ui/react'
+import {
+  Container,
+  Heading,
+  Image,
+  Flex,
+  Spacer,
+  Link,
+  Text,
+  Box,
+} from '@chakra-ui/react'
 
 export const getStaticProps = async () => {
-  const today = new Date();
-  const beforeDate = new Date(new Date().setDate(today.getDate() - 30));
+  const today = new Date()
+  const beforeDate = new Date(new Date().setDate(today.getDate() - 30))
   //get movies for the last 30 days
-  const startDate = beforeDate.getFullYear() + "-" + (beforeDate.getMonth() + 1) + "-" + beforeDate.getDate();
+  const startDate =
+    beforeDate.getFullYear() +
+    '-' +
+    (beforeDate.getMonth() + 1) +
+    '-' +
+    beforeDate.getDate()
   const fetchURL = `https://api.themoviedb.org/3/discover/movie?api_key=339b085155875336dc96ea5cdc24d952&primary_release_date.gte=${startDate}`
-  const res = await fetch(
-    fetchURL
-  )
+  const res = await fetch(fetchURL)
   const movieData = await res.json()
   return {
     props: {
       fallback: {
-        [fetchURL]:
-          movieData,
+        [fetchURL]: movieData,
       },
     },
   }
@@ -49,18 +60,28 @@ export default function Home() {
   }
   return (
     <Container maxW="container.xl" w="100%" h="100vh">
-      <Flex align="center">
+      <Flex align="center" as="header">
         <Heading as="h1" py={10} pl={10} size="xl">
           Latest movies
         </Heading>
         <Spacer />
         <Link href="https://www.themoviedb.org/">
-          <Image w="150px" src="/logo-movie-db.svg" alt="moviedb.org logo"></Image>
+          <Image
+            w="150px"
+            src="/logo-movie-db.svg"
+            alt="moviedb.org logo"
+          ></Image>
         </Link>
       </Flex>
       <Container maxW="container.lg">
         <MovieList movies={movies} />
       </Container>
+      <Box as="footer" mx="auto" py={10} px={20} textAlign="center">
+        <Text>
+          Data provided by the moviedb.org - An app By Antal Tony Tettinger -
+          <Link href="https://tonytettinger.com"> tonytettinger.com</Link>
+        </Text>
+      </Box>
     </Container>
   )
 }
