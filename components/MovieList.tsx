@@ -34,7 +34,7 @@ const MovieList = ({ movies }: { movies: MovieProps }): JSX.Element => {
                     <StatLabel>Rating</StatLabel>
                     <StatNumber>{movie.vote_average}</StatNumber>
                     <StatHelpText>
-                      No. of votes: {movie.vote_count}
+                      No. of votes: {movie.vote_count.toFixed(1)}
                     </StatHelpText>
                   </Stat>
                   <Box textAlign="left" ml={3}>
