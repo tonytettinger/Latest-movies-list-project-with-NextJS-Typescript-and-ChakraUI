@@ -8,11 +8,14 @@ import {
   StatLabel,
   StatHelpText,
   StatNumber,
+  Box,
+  Stack,
+  Image,
+  Heading,
 } from '@chakra-ui/react'
-import { Box, Stack, Image } from '@chakra-ui/core'
-import type { MovieProps } from '../types/MovieProps'
-import type { MovieResults } from '../types/MovieProps'
+import type { MovieProps, MovieResults } from '../types/MovieProps'
 
+const basePosterPath = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
 const MovieList = ({ movies }: { movies: MovieProps }): JSX.Element => {
   const sortByDate = (a, b) => {
     return b.vote_average - a.vote_average
@@ -20,11 +23,10 @@ const MovieList = ({ movies }: { movies: MovieProps }): JSX.Element => {
   const orderedByReleaseDate = [...movies.results].sort(sortByDate)
   return (
     <Accordion allowToggle>
-      {orderedByReleaseDate.map((movie: MovieResults) => {
-        const posterPath = `https://www.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}`
+      {orderedByReleaseDate.map((movie: MovieResults): JSX.Element => {
         return (
           <AccordionItem key={movie.id}>
-            <div>
+            <Box>
               <AccordionButton
                 _expanded={{ bg: '#34495e', color: '#fff' }}
                 _focus={{ boxShadow: 'none' }}
@@ -32,31 +34,31 @@ const MovieList = ({ movies }: { movies: MovieProps }): JSX.Element => {
                 <Stack direction="row" align="center">
                   <Stat minWidth="120px">
                     <StatLabel>Rating</StatLabel>
-                    <StatNumber>{movie.vote_average}</StatNumber>
+                    <StatNumber>{movie.vote_average.toFixed(1)}</StatNumber>
                     <StatHelpText>
-                      No. of votes: {movie.vote_count.toFixed(1)}
+                      No. of votes: {Math.floor(movie.vote_count)}
                     </StatHelpText>
                   </Stat>
                   <Box textAlign="left" ml={3}>
-                    <h3>
+                    <Heading as="h3" size="md">
                       {movie.title}
-                    </h3>
+                    </Heading>
                   </Box>
                 </Stack>
                 <AccordionIcon ml="auto" />
               </AccordionButton>
-            </div>
+            </Box>
             <AccordionPanel pb={4}>
-              <Stack direction="row">
-              <Image
-                    objectFit="contain"
-                    src={posterPath}
-                    alt={movie.title}   
-                    borderRadius='5%'
-                    alignSelf="center"
-                    width="150px"
-                    height="225px"
-                  />
+              <Stack direction={{ base: 'column', md: 'row' }}>
+                <Image
+                  objectFit="contain"
+                  src={basePosterPath + movie.poster_path}
+                  alt={movie.title}
+                  borderRadius="5%"
+                  alignSelf="center"
+                  width="150px"
+                  height="225px"
+                />
                 <Stack justify="center" ml={3}>
                   <Box textAlign="left">Relase date: {movie.release_date}</Box>
                   <Box>{movie.overview}</Box>

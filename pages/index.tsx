@@ -1,6 +1,5 @@
 import useMovies from '../hooks/useMovies'
 import MovieList from '../components/MovieList'
-import { Spinner } from '@chakra-ui/core'
 import {
   Container,
   Heading,
@@ -10,6 +9,7 @@ import {
   Link,
   Text,
   Box,
+  Spinner,
 } from '@chakra-ui/react'
 
 export const getStaticProps = async () => {
@@ -79,7 +79,10 @@ export default function Home() {
       <Box as="footer" mx="auto" py={10} px={20} textAlign="center">
         <Text>
           Data provided by the moviedb.org - An app By Antal Tony Tettinger -
-          <Link href="https://tonytettinger.com"> tonytettinger.com</Link>
+          <Link href="https://tonytettinger.netlify.app/">
+            {' '}
+            https://tonytettinger.netlify.app/
+          </Link>
         </Text>
       </Box>
     </Container>
