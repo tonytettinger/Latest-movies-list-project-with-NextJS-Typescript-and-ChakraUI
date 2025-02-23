@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   const startDate =
     beforeDate.getFullYear() +
     '-' +
-    (beforeDate.getMonth() + 1) +
+    beforeDate.getMonth() +
     '-' +
     beforeDate.getDate()
   const todaysDate = today.toISOString().split('T')[0]

@@ -1,4 +1,5 @@
 import { Stack, Box, Image } from '@chakra-ui/react'
+import { MovieResultProps } from '../types/MovieProps'
 
 interface MovieListItemBodyProps {
   movie: MovieResultProps
