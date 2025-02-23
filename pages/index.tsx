@@ -12,28 +12,6 @@ import {
   Spinner,
 } from '@chakra-ui/react'
 
-export const getStaticProps = async () => {
-  const today = new Date()
-  const beforeDate = new Date(new Date().setDate(today.getDate() - 30))
-  //get movies for the last 30 days
-  const startDate =
-    beforeDate.getFullYear() +
-    '-' +
-    (beforeDate.getMonth() + 1) +
-    '-' +
-    beforeDate.getDate()
-  const fetchURL = `https://api.themoviedb.org/3/discover/movie?api_key=339b085155875336dc96ea5cdc24d952&primary_release_date.gte=${startDate}`
-  const res = await fetch(fetchURL)
-  const movieData = await res.json()
-  return {
-    props: {
-      fallback: {
-        [fetchURL]: movieData,
-      },
-    },
-  }
-}
-
 export default function Home() {
   const { movies, isLoading, isError } = useMovies()
 
